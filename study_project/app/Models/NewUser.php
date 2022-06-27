@@ -13,7 +13,7 @@ class NewUser extends Model{
     use HasApiTokens, HasFactory, Notifiable;
 
     protected $table = 'user';
-    public $timestamps = true;
+    public $timestamps = false;
 
     protected $fillable = [
         'name',
