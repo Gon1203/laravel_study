@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\BoardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,3 +20,34 @@ Route::get('/', function () {
 });
 
 Route::resource('/newuser', UserController::class);
+
+Route::resource('/board', BoardController::class);
+
+Route::group(['namespace' => 'App\Http\Controllers'], function(){
+
+    Route::get('/', function(){
+        return view('welcome');
+    });
+
+    Route::group(['middleware' => ['guest']], function(){
+        /**
+         *  회원가입 라우트
+         */
+        Route::get('/register', 'RegisterController@show')->name('register.show');
+        Route::post('/register', 'RegisterController@register')->name('register.perform');
+        /**
+         *  로그인 라우트
+         */
+        Route::get('/login', 'LoginController@show')->name('login.show');
+        Route::post('/login', 'LoginController@login')->name('login.perform');
+    });
+
+    Route::group(['middleware' => ['auth']], function(){
+        /**
+         * 로그아웃 라우트
+         */
+        Route::get('/logout', 'LogoutController@perform')-name('logout.perform');
+    });
+
+
+});
