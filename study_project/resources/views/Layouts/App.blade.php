@@ -4,7 +4,7 @@
     <title>App Name - @yield('title')</title>
 
     <!-- Bootstrap -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/css/bootstrap.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Font Awesome JS -->
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js"
@@ -15,6 +15,12 @@
     </script>
 
     <style>
+        table {
+            margin-top: 10px;
+            border: black solid 1px;
+
+        }
+
         .footer {
             position: fixed;
             left: 0;
@@ -33,7 +39,10 @@
 
 </head>
 
-<body>
+<body class="text-center">
+
+    @include('layouts.partials.navbar')
+
     @section('sidebar')
 
     @show
@@ -41,6 +50,8 @@
     <div class="container">
         @yield('content')
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

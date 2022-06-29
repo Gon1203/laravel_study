@@ -2,6 +2,10 @@
 
 namespace App\Providers;
 
+use App\Models\Board;
+use App\Models\User;
+use App\Models\Comment;
+use App\Providers\Auth;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 
@@ -25,6 +29,9 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        Gate::define('change_board', function(User $user, Board $board){
+            return $user->username === $board->writer;
+        });
+
     }
 }

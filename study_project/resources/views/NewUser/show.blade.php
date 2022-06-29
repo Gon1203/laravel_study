@@ -17,7 +17,7 @@
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>Name : {{ $newUser->name }}</strong>
+                <strong>Name : {{ $newUser->username }}</strong>
 
             </div>
         </div>

@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BoardController;
+use App\Http\Controllers\CommentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,7 +17,7 @@ use App\Http\Controllers\BoardController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
 
 Route::resource('/newuser', UserController::class);
@@ -26,7 +27,7 @@ Route::resource('/board', BoardController::class);
 Route::group(['namespace' => 'App\Http\Controllers'], function(){
 
     Route::get('/', function(){
-        return view('welcome');
+        return view('index');
     });
 
     Route::group(['middleware' => ['guest']], function(){
@@ -46,8 +47,9 @@ Route::group(['namespace' => 'App\Http\Controllers'], function(){
         /**
          * 로그아웃 라우트
          */
-        Route::get('/logout', 'LogoutController@perform')-name('logout.perform');
+        Route::get('/logout', 'LogoutController@perform')->name('logout.perform');
     });
 
-
+    Route::post('/comment', 'CommentController@store')->name('commnet.write');
+    Route::delete('/comment/{id}','CommentController@destroy')->name('comment.delete');
 });

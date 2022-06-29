@@ -30,9 +30,9 @@
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                    <strong>Name</strong>
-                    <input type="text" name="name" class="form-control" placeholder="name"
-                        value="{{ $newUser['name'] }}">
+                    <strong>ID</strong>
+                    <input type="text" name="username" class="form-control" placeholder="username"
+                        value="{{ $newUser['username'] }}" readonly>
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
@@ -44,7 +44,7 @@
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                    <strong>NEW Password</strong>
+                    <strong>새 비밀번호</strong>
                     <input type="password" name="password" class="form-control" placeholder="Put the password">
                 </div>
             </div>

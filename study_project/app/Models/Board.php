@@ -15,5 +15,14 @@ class Board extends Model
         'writer'
     ];
 
+    /**
+     * Get all of the comments for the Board
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
 
 }

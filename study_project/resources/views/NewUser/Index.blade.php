@@ -20,14 +20,14 @@
     <table class="table table-boredered table-responsive-lg">
         <tr>
             <th>No</th>
-            <th>Name</th>
+            <th>ID</th>
             <th>Email</th>
             <th>Action</th>
         </tr>
         @foreach ($newUsers as $newUser)
             <tr>
                 <td>{{ $newUser->id }}</td>
-                <td>{{ $newUser->name }}</td>
+                <td>{{ $newUser->username }}</td>
                 <td>{{ $newUser->email }}</td>
                 <td>
                     <form action="/newuser/{{ $newUser['email'] }}" method="POST">

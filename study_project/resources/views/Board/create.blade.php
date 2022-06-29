@@ -11,7 +11,8 @@
                 </div>
                 <div class="col-xs-12">
                     <label for="writer">작성자</label>
-                    <input type="text" name="writer" class="form-controll">
+                    <input type="text" name="writer" class="form-controll" value="{{ auth()->user()->username }}"
+                        readonly>
                 </div>
                 <div class="mb-3">
                     <label for="boardContent" class="form-label">내용 : </label>

@@ -28,19 +28,19 @@
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                    <strong>Name:</strong>
-                    <input type="text" name="name" class="form-control" placeholder="name">
+                    <strong class="text-left">ID</strong>
+                    <input type="text" name="username" class="form-control" placeholder="ID">
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                    <strong>email:</strong>
+                    <strong>Email</strong>
                     <input type="email" name="email" class="form-control" placeholder="abc@abcd.com">
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                    <strong>Password:</strong>
+                    <strong>Password</strong>
                     <input type="password" name="password" class="form-control" placeholder="Put the password">
                 </div>
             </div>

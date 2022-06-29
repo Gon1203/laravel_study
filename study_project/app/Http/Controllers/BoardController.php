@@ -3,7 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Board;
+use App\Models\Comment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Auth;
+use DB;
+
 
 class BoardController extends Controller
 {
@@ -25,7 +30,12 @@ class BoardController extends Controller
      */
     public function create()
     {
-        return view('Board.create');
+        if(! Auth::check()){
+            return redirect()->route('login.show');
+        }else{
+
+            return view('Board.create');
+        }
     }
 
     /**
@@ -54,7 +64,9 @@ class BoardController extends Controller
      */
     public function show(Board $board)
     {
-        //
+
+        $comments = Board::find($board->id)->comments;
+        return view('Board.show', compact('board', 'comments'));
     }
 
     /**
@@ -77,6 +89,10 @@ class BoardController extends Controller
      */
     public function update(Request $request, Board $board)
     {
+        if(! Gate::allows('change_board', $board)){
+            abort(403);
+        }
+
         $validate = $request->validate([
             'title' => 'required',
             'writer' => 'required',
@@ -104,8 +120,16 @@ class BoardController extends Controller
      */
     public function destroy(Board $board)
     {
+        if(! Gate::allows('change_board', $board)){
+            abort(403);
+        }
+        DB::beginTransaction();
+        $comments = Comment::where('board_id', $board->id)->get();
+        foreach ($comments as $comment) {
+            $comment -> delete();
+        }
         $board -> delete();
-
+        DB::commit();
         return redirect()->route("board.index") -> with('message', "Board Delete Success");
     }
 }
