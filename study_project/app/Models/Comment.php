@@ -12,6 +12,9 @@ class Comment extends Model
     protected $fillable = [
         'writer',
         'content',
-        'board_id'
+        'board_id',
+        'group_id',
+        'order',
+        'depth'
     ];
 }

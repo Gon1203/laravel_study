@@ -17,7 +17,10 @@ return new class extends Migration
             $table->id();
             $table->integer('board_id');
             $table->string('writer');
-            $table->string('content');
+            $table->string('content', 300);
+            $table->integer('group_id')->nullable();
+            $table->integer('order')->nullable();
+            $table->integer('depth')->nullable();
             $table->timestamps();
         });
     }

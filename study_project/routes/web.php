@@ -50,6 +50,6 @@ Route::group(['namespace' => 'App\Http\Controllers'], function(){
         Route::get('/logout', 'LogoutController@perform')->name('logout.perform');
     });
 
-    Route::post('/comment', 'CommentController@store')->name('commnet.write');
+    Route::post('/comment', 'CommentController@store')->name('comment.write');
     Route::delete('/comment/{id}','CommentController@destroy')->name('comment.delete');
 });

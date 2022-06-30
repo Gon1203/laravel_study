@@ -19,7 +19,7 @@ class BoardController extends Controller
      */
     public function index()
     {
-        $boards = Board::latest() -> paginate(5);
+        $boards = Board::latest() -> simplePaginate(5);
         return view('Board.index', compact('boards'));
     }
 
@@ -65,8 +65,9 @@ class BoardController extends Controller
     public function show(Board $board)
     {
 
-        $comments = Board::find($board->id)->comments;
-        return view('Board.show', compact('board', 'comments'));
+        $comments = Comment::where('board_id', $board->id)->where('depth', 0)->get();
+        $replys = Comment::where('board_id', $board->id)->where('depth', '>', 0)->get();
+        return view('Board.show', compact('board', 'comments', 'replys'));
     }
 
     /**
@@ -123,6 +124,7 @@ class BoardController extends Controller
         if(! Gate::allows('change_board', $board)){
             abort(403);
         }
+        // beginTransaction ~ commit 사이의 쿼리들이 에러 없이 모두 실행되었을때 최종 커밋
         DB::beginTransaction();
         $comments = Comment::where('board_id', $board->id)->get();
         foreach ($comments as $comment) {
