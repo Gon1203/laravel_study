@@ -35,18 +35,20 @@
                 </td>
                 <td>{{ $board->created_at }}</td>
                 <td>
-                    <form action="/board/{{ $board['id'] }}" method="POST">
-                        <a href="{{ route('board.edit', $board->id) }}">
-                            <i class="fas fa-edit fa-lg"></i>
-                        </a>
+                    @can('change_board', $board)
+                        <form action="/board/{{ $board['id'] }}" method="POST">
+                            <a href="{{ route('board.edit', $board->id) }}">
+                                <i class="fas fa-edit fa-lg"></i>
+                            </a>
 
-                        @csrf
-                        @method('DELETE')
+                            @csrf
+                            @method('DELETE')
 
-                        <button type="submit" title="delete" style="border: none; background-color:transparent;">
-                            <i class="fas fa-trash fa-lg text-danger"></i>
-                        </button>
-                    </form>
+                            <button type="submit" title="delete" style="border: none; background-color:transparent;">
+                                <i class="fas fa-trash fa-lg text-danger"></i>
+                            </button>
+                        </form>
+                    @endcan
                 </td>
 
             </tr>

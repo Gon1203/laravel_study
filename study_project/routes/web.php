@@ -16,9 +16,6 @@ use App\Http\Controllers\CommentController;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
 
 Route::resource('/newuser', UserController::class);
 
@@ -26,9 +23,7 @@ Route::resource('/board', BoardController::class);
 
 Route::group(['namespace' => 'App\Http\Controllers'], function(){
 
-    Route::get('/', function(){
-        return view('index');
-    });
+    Route::get('/', 'HomeController@index')->name('home.index');
 
     Route::group(['middleware' => ['guest']], function(){
         /**

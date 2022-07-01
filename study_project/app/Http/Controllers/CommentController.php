@@ -60,7 +60,7 @@ class CommentController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
+     * 댓글을 삭제하면 같은 group_id를 가진 답글들도 모두 삭제
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
@@ -79,7 +79,6 @@ class CommentController extends Controller
         DB::commit();
 
         return back();
-
 
 
     }

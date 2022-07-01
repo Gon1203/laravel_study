@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Board;
 use App\Models\Comment;
+use App\Http\Controllers\ImageUploadController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Auth;
@@ -46,12 +47,24 @@ class BoardController extends Controller
      */
     public function store(Request $request)
     {
-        $board = $request -> validate([
-            'title' => 'required',
-            'content' => 'required'
-        ]);
+        $board = new Board();
+        $board->title = $request->title;
+        $board->writer = $request->writer;
+        $board->content = $request->content;
 
-        Board::create($request->all());
+        $board->save();
+
+        // dd($board->id);
+
+
+
+
+        if($request->image != null){
+            $board_id = $board->id;
+            $image_controller = new ImageUploadController;
+            $image = $request->file('image');
+            $image_controller->upload($image, $board_id);
+        }
 
         return redirect() -> route('board.index');
     }
@@ -78,6 +91,10 @@ class BoardController extends Controller
      */
     public function edit(Board $board)
     {
+        if(! Gate::allows('change_board', $board)){
+            abort(403);
+        }
+
         return view('Board.edit', compact('board'));
     }
 
